@@ -3,49 +3,44 @@ If you want to help support the development of this project, please buy my game 
 https://store.steampowered.com/app/1384030/Boppio/
 
 # DLLValidityCheck
-A simple Unity C# script for checking the integrity of DLL files during runtime.
+A simple Unity C# script for checking the integrity of DLL files at startup.
 
 Hello there :)
 
-Unfortunately if you've come across this project someone has probably cracked your Steam game, which
-is extremely frustrating as a game developer. The point of this project is to give you some basic
-detection tools for trivial attacks, which will stop most crackers. However any game can be cracked
-given enough time and enough willpower. We just want to provide all Unity game developers some
-simple defense against these DLL substitution attacks. This should be good "enough" to prevent
-most automated forms of attacks.
+Unfortunately if you've come across this project someone has probably cracked your Steam game, which is extremely frustrating as a game developer. However most of these cracks are just simple DLL subititutions, therefore they are easy to detect. This plugin does not *prevent* DLL substitution, it just detects if you're running in an environment where one or more of your DLLs have changed since the build phase.
+
+## Requirements
 
 Some assumptions we're making:
+ - You're running Unity 2019.4, other versions are not tested but may work just fine.
  - You are building for standalone Windows, Mac OSX or Linux. Mobile or web builds are not officially supported right now.
- - All of your plugins are within the `Assets/Plugins` directory (or subdirectories therein)
+ - All of your plugins are within the `Assets/Plugins` directory (or subdirectories therein).
+
+## Usage
+
+If you just want to import a Unity package, check out our [releases page](https://github.com/boppygames/DLLValidityCheck/releases) and just import the latest release into Unity.
 
 How to get the most out of this script:
- - Call `DllValidityCheck.CheckIntegrity()` at startup. Think very carefully about what you want to do when the
-        the integrity is invalid - if you close the application right away it will make it very easy for a cracker
-        to find your logic for checking DLL integrity.
+ - Call `DllValidityCheck.CheckIntegrity()` at startup - decide what you want to do here.
  - We recommend keeping `DLLValidityCheck.computeHashesOnBuild` enabled, so that hashes are computed automatically during build.
  - We recommend keeping `DLLValidityCheck.strictChecks` enabled, although it can cause false positives if you are loading custom
         DLLs outside of the build.
  - We STRONGLY recommend disabling `DLLValidityCheck.printHashErrors` in builds - printing hash errors will make it really easy
         for a cracker to see where you are checking for validity.
+        
 HIGHLY Recommended asset to pair with this:
  - BeeByte's obfuscator: https://assetstore.unity.com/packages/tools/utilities/obfuscator-48919
-   - If you use BeeByte's obfuscator make sure you enable class/method/property renaming for this class. Also
-        make sure to configure the obfuscator to generate additional "garbage" methods (~500+/class is good).
+   - If you use BeeByte's obfuscator make sure you enable class/method/property renaming.
 
 Other helpful assets:
  - ACT: https://assetstore.unity.com/packages/tools/utilities/anti-cheat-toolkit-152334
 
+## Cracked Environments
 
-## Releases
+There seem to be quite a few opinions on the internet on what to do when you're running in a cracked environment. I think these seem to be the best options:
+ - Restrict the player to demo mode, this works nicely because if you already have a free demo then the cracked versions are basically free distribution of your demo.
+ - Close the app after a random interval between 5-10 minutes. If you close the app right away it could make it easier for a cracker to figure out where in the code you are closing the app.
+ - Let the player play normally, just with a watermark or warning they are running cracked software
 
-If you just want to import a Unity package, we wil provide them as github releases.
+I would recommend if you are running in a cracked environment to try to prevent your app from loading any new DLLs. This means you should check to see if you're running in cracked mode before doing *any* `steam_api` calls.
 
-## Off Topic
-
-My only request is that if you use this script, do no harm to the user's machine who is running your
-cracked software. Most people who download cracked software/games wouldn't have paid for your software/game
-anyway and doing harm to their hardware is wrong. Also consider a large portion of people downloading 
-cracked software are children or college students who have no money.
-
-This tool is pretty much as import-and-never-touch-again as possible. I'm a game developer myself and I know
-nobody wants to use a plugin that needs constant attention, so I've designed this to be as simple as possible.
