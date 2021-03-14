@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
   - enabled: 1
-    path: Assets/Scene.unity
+    path: Assets/DLLValidityCheck/Scene.unity
     guid: 2875d93c8a1b1504c90f9e32f9d6dc8b
   m_configObjects: {}
