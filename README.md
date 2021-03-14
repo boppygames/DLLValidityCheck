@@ -44,3 +44,6 @@ There seem to be quite a few opinions on the internet on what to do when you're 
 
 I would recommend if you are running in a cracked environment to try to prevent your app from loading any new DLLs. This means you should check to see if you're running in cracked mode before doing *any* `steam_api` calls.
 
+## Limitations
+
+If someone is motivated enough they will be able to crack your game reguardless of what you do. This detection code can also easily be defeated if the cracker figures out where in your DLL you are checking for validity, and then just disabling that check. Its also wise to have multiple layers of security here - meaning you should also be using a code obfuscator to make it harder for crackers to figure out where in your code you are doing these checks.
