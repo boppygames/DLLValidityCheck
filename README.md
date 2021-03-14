@@ -18,7 +18,7 @@ Some assumptions we're making:
 
 ## Usage
 
-If you just want to import a Unity package, check out our [releases page](https://github.com/boppygames/DLLValidityCheck/releases) and just import the latest release into Unity.
+If you just want to import a Unity package, check out our [releases page](https://github.com/boppygames/DLLValidityCheck/releases) and just import the latest release into Unity. We recommend looking at the example scene before you implement this in your own app.
 
 How to get the most out of this script:
  - Call `DllValidityCheck.CheckIntegrity()` at startup - decide what you want to do here.
