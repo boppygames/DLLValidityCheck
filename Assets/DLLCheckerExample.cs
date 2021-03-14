@@ -35,6 +35,15 @@ public class DLLCheckerExample : MonoBehaviour
     
     void Start()
     {
-        Debug.LogError($"Validity: {dllValidity.CheckIntegrity()}");
+        var validity = dllValidity.CheckIntegrity();
+        
+        // Stop the game randomly 3 or 10 minutes from now. This would drive most crackers insane.
+        if(!validity) Invoke(nameof(StopGame), UnityEngine.Random.Range(3, 10) * 60.0f);
+    }
+
+    void StopGame()
+    {
+        // We give a non-zero error code here so it looks like a crash
+        Application.Quit(1);
     }
 }

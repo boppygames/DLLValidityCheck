@@ -48,10 +48,10 @@ using UnityEditor.Build;
 ///  - All of your plugins are within the Assets/Plugins directory (or subdirectories therein)
 ///
 /// How to use this class:
-///  - Call CheckIntegrity() at startup and during semi-regular intervals to make sure no new malicious DLLs
-///         have been loaded. Choose what you want to do here: it could make it more obvious to a cracker that
-///         you are aware of them if you close the application right away so think about what the right strategy
-///         is for your game.
+///  - Call CheckIntegrity() at startup. Choose what you want to do here: you could make it more obvious to a cracker
+///         that you are aware of them if you close the application right away so think about what the right strategy
+///         is for your game. I think one good strategy is to convert to "demo mode" and link to your store page once
+///         the player has finished their "demo".
 ///  - We recommend keeping computeHashesOnBuild enabled, so that hashes are computed automatically during build.
 ///  - We recommend keeping strictChecks enabled, although it can cause false positives if you are loading custom
 ///         DLLs outside of the build.
