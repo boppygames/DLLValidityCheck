@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4f514377bba5d43ac8ee7da277b4d2, type: 3}
+  m_Name: DLLValidityCheck
+  m_EditorClassIdentifier: 
+  computeHashesForDevelopmentBuilds: 1
+  computeHashesOnBuild: 1
+  strictChecks: 1
+  dlls:
+  - dllName: UtilDLL.dll
+    dllSha: 523FB6CB7784294737E63A108AE099AC5190FC8CDE5D97150A1A692A1CBDF973
+  - dllName: com.squareup.okhttp3.okhttp-4.2.2.jar
+    dllSha: 5064182CFF40B100CE57FBF3CE985E12E38CF4433724E81B175C1843EAECBB75
+  - dllName: com.squareup.okio.okio-2.2.2.jar
+    dllSha: E58C97406A6BB1138893750299AC63C6AA04B38B6B49EAE1BFCAD1A63EF9BA1B
+  - dllName: org.jetbrains.annotations-13.0.jar
+    dllSha: ACE2A10DC8E2D5FD34925ECAC03E4988B2C0F851650C94B8CEF49BA1BD111478
+  - dllName: org.jetbrains.kotlin.kotlin-stdlib-1.3.50.jar
+    dllSha: E6F05746EE0366D0B52825A090FAC474DCF44082C9083BBB205BD16976488D6C
+  - dllName: org.jetbrains.kotlin.kotlin-stdlib-common-1.3.50.jar
+    dllSha: 8CE678E88E4BA018B66DACECF952471E4D7DFEE156A8A819760A5A5FF29D323C
+  - dllName: Mono.Data.Sqlite.dll
+    dllSha: 5CFD7D5E444EC8D53755D4D82220524AA455F34B87A6F740B984D50465D76D4B
+  - dllName: libsqlite3.so
+    dllSha: 7AF85467A880A097542E4E0B8CF43F6C767ABB6A9097EEFEE72D0037B74DEABD
+  - dllName: libsqlite3.so
+    dllSha: 8922CD5CACA0951366767AF9DFE79B01549958CC027E11F18161A279591A536A
+  - dllName: libsqlite3.so
+    dllSha: 4AFE1ADB69766D2BE340473A7172C3371AFABB959A9C3E66D433842856F21265
+  - dllName: sqlite3.dll
+    dllSha: D4042EDD094ED6E4B56057427C0812F36A6394577D1F139DEDB3113F1C0B8147
+  - dllName: libsteam_api.dylib
+    dllSha: 5AD00AA60EB19180A79048314CE6C940BEF138B6DCCFC685DB3D8272D89CBB63
+  - dllName: libsteam_api.dylib
+    dllSha: 518D761063AD031415E9D0F3251AF50859E6CFF6638948E794CD3B781575786A
+  - dllName: libsteam_api.so
+    dllSha: 6B5B7B260FF925B216DFB3643131C4DA9D6A5DDD8C5C8F44BEED85AC09BE62A4
+  - dllName: steam_api64.dll
+    dllSha: 473F5A312B56519F347741B63F3DEA590946B96EA40EF3803D5F452C39AF2F1E
+  printHashErrors: 0
