@@ -12,7 +12,28 @@ using UnityEditor;
 using UnityEditor.Build;
 #endif
 
+/// MIT License
 ///
+/// Copyright (c) 2021 Boppy Games, LLC
+///
+/// Permission is hereby granted, free of charge, to any person obtaining a copy
+/// of this software and associated documentation files (the "Software"), to deal
+/// in the Software without restriction, including without limitation the rights
+/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+/// copies of the Software, and to permit persons to whom the Software is
+/// furnished to do so, subject to the following conditions:
+///
+/// The above copyright notice and this permission notice shall be included in all
+/// copies or substantial portions of the Software.
+///
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+/// SOFTWARE.
+/// 
 /// Hello there :)
 ///
 /// Unfortunately if you've come across this project someone has probably cracked your game, which
@@ -23,7 +44,7 @@ using UnityEditor.Build;
 /// most automated forms of attacks.
 ///
 /// Some assumptions we're making in this class:
-///  - You are building for Windows, Mac OSX or Linux (64 or 32 bit is fine)
+///  - You are building for Windows, Mac OSX or Linux. Mobile or web builds are not officially supported right now.
 ///  - All of your plugins are within the Assets/Plugins directory (or subdirectories therein)
 ///
 /// How to use this class:
@@ -34,17 +55,22 @@ using UnityEditor.Build;
 ///  - We recommend keeping computeHashesOnBuild enabled, so that hashes are computed automatically during build.
 ///  - We recommend keeping strictChecks enabled, although it can cause false positives if you are loading custom
 ///         DLLs outside of the build.
-///  - We strongly recommend disabling printHashErrors in builds - printing hash errors will make it really easy
+///  - We STRONGLY recommend disabling printHashErrors in builds - printing hash errors will make it really easy
 ///         for a cracker to see where you are checking for validity.
 ///
 /// HIGHLY Recommended asset to pair with this:
 ///  - BeeByte's obfuscator: https://assetstore.unity.com/packages/tools/utilities/obfuscator-48919
 ///
 /// If you use BeeByte's obfuscator make sure you enable class/method/property renaming for this class. Also
-/// make sure to configure the obfuscator to generate additional "garbage" methods.
+/// make sure to configure the obfuscator to generate additional "garbage" methods (~500+/class is good).
 /// 
 /// Other helpful assets:
 ///  - ACT: https://assetstore.unity.com/packages/tools/utilities/anti-cheat-toolkit-152334
+///
+/// My only request is that if you use this script, do no harm to the user's machine who is running your
+/// cracked software. Most people who download cracked software/games wouldn't have paid for your software/game
+/// anyway and doing harm to them or their hardware won't help the problem of game piracy. Also consider a large
+/// portion of people downloading cracked software are children who have no money.
 public class DLLValidityCheck : ScriptableObject
 #if UNITY_EDITOR
     , IPreprocessBuildWithReport
@@ -53,8 +79,8 @@ public class DLLValidityCheck : ScriptableObject
     [Serializable]
     public struct DLLDefinition
     {
-        public string dllName;
-        public string dllSha;
+        public string dllName; // The filename of the DLL
+        public string dllSha; // The SHA-256 hash of the DLL
     }
 
     readonly string[] dllEndings =
@@ -92,8 +118,7 @@ public class DLLValidityCheck : ScriptableObject
     [SerializeField] bool printHashErrors = false;
     
     /// <summary>
-    /// You should call this function during startup, and during certain intervals to make sure no new DLLs have
-    /// been loaded that could be malicious.
+    /// You should call this function during startup.
     ///
     /// We strongly, strongly recommend buying the recommended obfuscator plugin to try to hide this function. If
     /// a cracker is able to rewrite this function, we lose all of the protection it provides.
@@ -149,6 +174,11 @@ public class DLLValidityCheck : ScriptableObject
             yield return result;
     }
 
+    /// <summary>
+    /// This is just a simple SHA-256 computation function.
+    /// </summary>
+    /// <param name="filePath">The file to hash.</param>
+    /// <returns>The hash of the file</returns>
     string GetSha256(string filePath)
     {
         var fileBytes = File.ReadAllBytes(filePath);
