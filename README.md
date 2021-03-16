@@ -28,6 +28,8 @@ How to get the most out of this script:
  - We STRONGLY recommend disabling `DLLValidityCheck.printHashErrors` in builds - printing hash errors will make it really easy
         for a cracker to see where you are checking for validity.
         
+**Warning: Do NOT compile this into a separate DLL - include this code in your Unity project. If you build this into a DLL it will make it trivial for a cracker to bypass the checks provided here.**
+        
 HIGHLY Recommended asset to pair with this:
  - BeeByte's obfuscator: https://assetstore.unity.com/packages/tools/utilities/obfuscator-48919
    - If you use BeeByte's obfuscator make sure you enable class/method/property renaming.
